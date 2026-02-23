@@ -9,9 +9,11 @@ from drf_extra.mixins import RetrieveModelMixin, ListModelMixin
 from drf_extra.viewsets import GenericViewSet
 ...
 
-class OrderViewSet(RetrieveModelMixin,
-                   ListModelMixin,
-                   GenericViewSet):
+class OrderViewSet(
+    RetrieveModelMixin,
+    ListModelMixin,
+    GenericViewSet
+):
     response_action_serializer_classes = {
         "retrieve": OrderSerializer,
         "list": OrderListSerializer,
@@ -29,9 +31,11 @@ from drf_extra.mixins import CreateModelMixin, ListModelMixin
 from drf_extra.viewsets import GenericViewSet
 ...
 
-class OrderViewSet(CreateModelMixin,
-                   ListModelMixin,
-                   GenericViewSet):
+class OrderViewSet(
+    CreateModelMixin,
+    ListModelMixin,
+    GenericViewSet
+):
     request_action_serializer_classes = {
         "create": OrderCreateSerializer,
     }
@@ -64,10 +68,12 @@ from drf_extra.viewsets import GenericViewSet
 from drf_extra.permissions import AllowAny, IsAuthenticated
 ...
 
-class OrderViewSet(CreateModelMixin,
-                   UpdateModelMixin,
-                   ListModelMixin,
-                   GenericViewSet):
+class OrderViewSet(
+    CreateModelMixin,
+    UpdateModelMixin,
+    ListModelMixin,
+    GenericViewSet
+):
     action_permission_classes = {
         "create": IsAuthenticated,
         "update": [IsAuthenticated, IsOrderOwner],
