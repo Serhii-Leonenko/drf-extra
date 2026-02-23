@@ -5,16 +5,16 @@
 Each action can have a separate serializer:
 
 ```python
-from drf_base.mixins import RetrieveModelMixin, ListModelMixin
-from drf_base.viewsets import GenericViewSet
+from drf_extra.mixins import RetrieveModelMixin, ListModelMixin
+from drf_extra.viewsets import GenericViewSet
 ...
 
 class OrderViewSet(RetrieveModelMixin,
                    ListModelMixin,
                    GenericViewSet):
     response_action_serializer_classes = {
-        'retrieve': OrderSerializer,
-        'list': OrderListSerializer,
+        "retrieve": OrderSerializer,
+        "list": OrderListSerializer,
     }
 ```
 
@@ -25,27 +25,27 @@ We found that more often than not we need a separate serializer for handling req
 How to achieve it in ViewSet:
 
 ```python
-from drf_base.mixins import CreateModelMixin, ListModelMixin
-from drf_base.viewsets import GenericViewSet
+from drf_extra.mixins import CreateModelMixin, ListModelMixin
+from drf_extra.viewsets import GenericViewSet
 ...
 
 class OrderViewSet(CreateModelMixin,
                    ListModelMixin,
                    GenericViewSet):
     request_action_serializer_classes = {
-        'create': OrderCreateSerializer,
+        "create": OrderCreateSerializer,
     }
     response_action_serializer_classes = {
-        'create': OrderResponseSerializer,
-        'list': OrderResponseSerializer,
-        'cancel': OrderResponseSerializer,
+        "create": OrderResponseSerializer,
+        "list": OrderResponseSerializer,
+        "cancel": OrderResponseSerializer,
     }
 ```
 
 How to achieve it in GenericAPIView:
 
 ```python
-from drf_base.generics import CreateAPIView
+from drf_extra.generics import CreateAPIView
 ...
 
 
@@ -59,9 +59,9 @@ class OrderCreateView(CreateAPIView):
 Each action can have a separate set of permissions:
 
 ```python
-from drf_base.mixins import CreateModelMixin, UpdateModelMixin, ListModelMixin
-from drf_base.viewsets import GenericViewSet
-from drf_base.permissions import AllowAny, IsAuthenticated
+from drf_extra.mixins import CreateModelMixin, UpdateModelMixin, ListModelMixin
+from drf_extra.viewsets import GenericViewSet
+from drf_extra.permissions import AllowAny, IsAuthenticated
 ...
 
 class OrderViewSet(CreateModelMixin,
@@ -69,9 +69,9 @@ class OrderViewSet(CreateModelMixin,
                    ListModelMixin,
                    GenericViewSet):
     action_permission_classes = {
-        'create': IsAuthenticated,
-        'update': [IsAuthenticated, IsOrderOwner],
-        'list': AllowAny,
+        "create": IsAuthenticated,
+        "update": [IsAuthenticated, IsOrderOwner],
+        "list": AllowAny,
     }
 ```
 
@@ -107,7 +107,7 @@ You will not have a single format out-of-the-box after installation. You need to
 ```python
 REST_FRAMEWORK = {
     ...
-    'EXCEPTION_HANDLER': 'drf_base.exception_handlers.errors_formatter_exception_handler',
+    "EXCEPTION_HANDLER": "drf_extra.exception_handlers.errors_formatter_exception_handler",
 }
 ```
 
@@ -119,7 +119,7 @@ If you use `drf_spectacular` for generating OpenAPI schema, you can use `Request
 ...
 SPECTACULAR_SETTINGS = {
     ...
-    "DEFAULT_SCHEMA_CLASS": "drf_base.openapi.RequestResponseAutoSchema",
+    "DEFAULT_SCHEMA_CLASS": "drf_extra.openapi.RequestResponseAutoSchema",
 }
 ```
 
@@ -130,6 +130,6 @@ If you want to authenticate users with email or username, you can use `EmailOrUs
 ```python
 ...
 AUTHENTICATION_BACKENDS = [
-    'drf_base.auth_backend.EmailOrUsernameModelBackend',
+    "drf_extra.auth_backend.EmailOrUsernameModelBackend",
 ]
 ```
