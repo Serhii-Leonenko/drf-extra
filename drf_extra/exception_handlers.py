@@ -1,7 +1,7 @@
 from rest_framework.exceptions import ErrorDetail, Throttled
 from rest_framework.views import exception_handler
 
-from base.errors_formatter import ErrorsFormatter
+from drf_extra.errors_formatter import ErrorsFormatter
 
 
 def errors_formatter_exception_handler(exc, context):

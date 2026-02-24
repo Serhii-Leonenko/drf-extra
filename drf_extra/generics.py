@@ -4,7 +4,7 @@ from django.core.exceptions import ImproperlyConfigured
 from rest_framework import generics
 from rest_framework.serializers import BaseSerializer
 
-from base.mixins import (
+from drf_extra.mixins import (
     CreateModelMixin,
     DestroyModelMixin,
     DjangoValidationErrorTransformMixin,

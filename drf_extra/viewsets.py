@@ -5,8 +5,8 @@ from rest_framework import viewsets
 from rest_framework.permissions import BasePermission
 from rest_framework.serializers import BaseSerializer
 
-from base.generics import GenericAPIView
-from base.mixins import (
+from drf_extra.generics import GenericAPIView
+from drf_extra.mixins import (
     CreateModelMixin,
     DestroyModelMixin,
     ListModelMixin,
