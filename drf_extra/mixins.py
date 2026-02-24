@@ -153,38 +153,3 @@ class DestroyModelMixin:
 
     def perform_destroy(self, instance, serializer=None):
         instance.delete()
-
-
-class ThumbnailMixin:
-    """
-    Add method for creating thumbnails
-    """
-
-    def make_thumbnail(self, img: Image) -> Image:
-        """
-        Crop and resize the image for thumbnail
-
-        Args:
-            img:
-
-        Returns:
-            Image
-        """
-        target_width, target_height = self.THUMBNAIL_SIZE
-        source_width, source_height = img.size
-        source_aspect = source_width / source_height
-        target_aspect = target_width / target_height
-
-        if source_aspect > target_aspect:
-            new_width = int(source_height * target_aspect)
-            offset = (source_width - new_width) // 2
-            box = (offset, 0, offset + new_width, source_height)
-        else:
-            new_height = int(source_width / target_aspect)
-            offset = (source_height - new_height) // 2
-            box = (0, offset, source_width, offset + new_height)
-
-        img = img.crop(box)
-        img.thumbnail(self.THUMBNAIL_SIZE, Image.Resampling.LANCZOS)
-
-        return img
